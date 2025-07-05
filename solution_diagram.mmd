@@ -1,0 +1,45 @@
+graph TD
+    A[Cliente: Web/Movil] -->|1. Solicitud POST /v1/users/register| B(Capa de Controlador: UserController)
+    B -->|2. Validar CreateUserRequest| C{Validacion de Entrada}
+    C -- Si es invalido --> D[Manejo de Errores: MethodArgumentNotValidException]
+    D -->|400 Bad Request| A
+    C -- Si es valido --> E(Capa de Servicio: UserService)
+    E -->|3. Llamar createUser| F{Logica de Negocio}
+    F -->|3.1. Buscar usuario por email| G(Capa de Repositorio: IUserRepository)
+    G -->|3.2. Consulta a la Base de Datos| H[Base de Datos: H2/Relacional]
+    H -- Si existe email --> I[Manejo de Errores: EmailAlreadyRegisteredException]
+    I -->|409 Conflict| B
+    H -- Si no existe email --> J{Procesar Usuario}
+    J -->|3.3. Codificar Contrasena| K(Componente: PasswordEncoder)
+    K -->|3.4. Mapear DTO a Modelo User, Phone| L[Modelos: User, Phone]
+L -->|3.5. Guardar Usuario y Telefonos| G
+G -->|3.6. Persistir en DB| H
+H -->|3.7. Usuario Guardado| F
+F -->|3.8. Mapear Modelo a DTO UserDto| M[DTOs: UserDto, CreateUserResponse]
+M -->|3.9. Retornar CreateUserResponse| E
+E -->|4. Retornar ResponseEntity| B
+B -->|5. Respuesta 201 Created| A
+B -->|Manejo de Excepciones Generales| N[Manejo de Errores: Excepcion Generica]
+N -->|500 Internal Server Error| A
+
+subgraph Spring Boot Application
+B
+C
+E
+F
+G
+K
+L
+M
+D
+I
+N
+end
+
+subgraph Capa de Seguridad Configuracion
+O[SecurityConfig] --> P(PasswordEncoder: BCryptPasswordEncoder)
+O --> Q(Filtro de Seguridad: CSRF, Sesion, Autorizacion)
+end
+
+O --- B
+K --- E

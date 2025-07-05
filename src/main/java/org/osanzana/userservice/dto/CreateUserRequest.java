@@ -14,7 +14,7 @@ public class CreateUserRequest {
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;
     @NotBlank(message = "El correo no puede estar vacío")
-    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Debe ser una dirección de correo bien formada (Ej. aaaaaaa@dominio.cl).")
     private String email;
     @NotBlank(message = "La contraseña no puede estar vacía")
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d.*\\d)[A-Za-z\\d]+$", message = "La contraseña debe tener una mayúscula, minúsculas y dos números.")

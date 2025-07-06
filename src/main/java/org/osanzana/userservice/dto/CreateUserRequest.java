@@ -17,7 +17,7 @@ public class CreateUserRequest {
     @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Debe ser una dirección de correo bien formada (Ej. aaaaaaa@dominio.cl).")
     private String email;
     @NotBlank(message = "La contraseña no puede estar vacía")
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d.*\\d)[A-Za-z\\d]+$", message = "La contraseña debe tener una mayúscula, minúsculas y dos números.")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d.*\\d)[A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{}|;:'\",.<>/?~]+$", message = "La contraseña debe tener una mayúscula, minúsculas y dos números.")
     private String password;
     @NotNull(message = "La lista de teléfonos no puede ser nula")
     @Valid

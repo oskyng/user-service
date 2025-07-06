@@ -13,7 +13,6 @@ import org.osanzana.userservice.repository.IUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -46,10 +45,6 @@ public class UserService implements IUserService {
                 }).collect(Collectors.toList()));
 
         user.setToken(UUID.randomUUID().toString());
-        user.setCreated(LocalDateTime.now());
-        user.setModified(LocalDateTime.now());
-        user.setLastLogin(LocalDateTime.now());
-        user.setActive(true);
         User saveUser = userRepository.save(user);
 
         CreateUserResponse response = new CreateUserResponse();

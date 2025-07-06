@@ -1,4 +1,4 @@
-package org.osanzana.userservice.exception;
+package org.osanzana.userservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

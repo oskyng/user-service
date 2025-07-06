@@ -3,7 +3,7 @@ package org.osanzana.userservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.osanzana.userservice.dto.CreateUserRequest;
 import org.osanzana.userservice.dto.CreateUserResponse;
-import org.osanzana.userservice.exception.CustomErrorResponse;
+import org.osanzana.userservice.dto.CustomErrorResponse;
 import org.osanzana.userservice.exception.EmailAlreadyRegisteredException;
 import org.osanzana.userservice.service.UserService;
 import org.springframework.http.HttpStatus;
